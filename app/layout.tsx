@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Poppins } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
+import Header from "@/components/Header";
 
 const poppins = Poppins({
   variable: "--font-poppins",
@@ -31,7 +32,8 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
           enableSystem
           disableTransitionOnChange
         >
-          {children}
+          <Header />
+          <main className="container mx-auto p-8 bg-background w-full h-screen">{children}</main>
         </ThemeProvider>
       </body>
     </html>
