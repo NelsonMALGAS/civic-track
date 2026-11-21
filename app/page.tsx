@@ -1,40 +1,19 @@
 import { Suspense } from "react";
 import { getServerSession } from "./server-actions";
 import {
-  ShieldAlert,
   UserRound,
-  LockKeyhole,
   Code2,
   Loader2,
 } from "lucide-react";
+import { SignOutButton } from "@/components/SignOutButton";
+import { redirect } from "next/navigation";
 
 async function UserSession() {
   const session = await getServerSession();
   const user = session?.user;
 
-  if (!user) {
-    return (
-      <div className="rounded-2xl border border-zinc-200 bg-white p-10 text-center shadow-sm dark:border-zinc-800 dark:bg-zinc-900">
-        <div className="mx-auto mb-6 flex h-16 w-16 items-center justify-center rounded-2xl bg-amber-50 dark:bg-amber-500/10">
-          <ShieldAlert className="h-8 w-8 text-amber-600 dark:text-amber-500" />
-        </div>
+  if (!user) redirect("/auth")
 
-        <h1 className="text-2xl font-bold tracking-tight text-zinc-900 dark:text-white">
-          Authentication Required
-        </h1>
-
-        <p className="mx-auto mt-3 max-w-sm text-sm leading-6 text-zinc-500 dark:text-zinc-400">
-          You are currently unauthenticated. Please sign in to access your
-          account information and protected resources.
-        </p>
-
-        <div className="mt-8 inline-flex items-center gap-2 rounded-lg bg-zinc-100 px-4 py-2 text-sm font-medium text-zinc-600 dark:bg-zinc-800 dark:text-zinc-300">
-          <LockKeyhole className="h-4 w-4" />
-          No active session found
-        </div>
-      </div>
-    );
-  }
 
   return (
     <div className="overflow-hidden rounded-2xl border border-zinc-200 bg-white shadow-sm dark:border-zinc-800 dark:bg-zinc-900">
@@ -99,6 +78,7 @@ export default function Home() {
         <p className="mt-6 text-center text-xs text-zinc-400">
           Authentication & Session Management
         </p>
+        <SignOutButton />
       </div>
     </main>
   );
