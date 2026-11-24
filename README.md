@@ -174,8 +174,8 @@ Before running CivicTrack locally, ensure you have:
 ### 1. Clone the repository
 
 ```bash
-git clone <your-repository-url>
-cd civictrack
+git clone https://github.com/NelsonMALGAS/civic-track.git
+cd civic-track
 ```
 
 ### 2. Install dependencies
@@ -194,6 +194,10 @@ DATABASE_URL="your_postgresql_connection_string"
 
 # Better Auth
 BETTER_AUTH_SECRET="your_secret_key"
+GOOGLE_CLIENT_ID="google-client-id"
+GOOGLE_CLIENT_SECRET="google-client-secret"
+GITHUB_CLIENT_ID="github-client-id"
+GITHUB_CLIENT_SECRET="github-client-secret"
 BETTER_AUTH_URL="http://localhost:3000"
 ```
 
@@ -210,13 +214,13 @@ CREATE EXTENSION IF NOT EXISTS postgis;
 ### 5. Generate database migrations
 
 ```bash
-npx drizzle-kit generate --name=initial_schema
+npm run db:generate
 ```
 
 ### 6. Apply migrations
 
 ```bash
-npx drizzle-kit migrate
+npm run db:migrate
 ```
 
 ### 7. Start the development server
