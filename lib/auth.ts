@@ -3,6 +3,7 @@ import { drizzleAdapter } from "better-auth/adapters/drizzle";
 import { db } from "@/db";
 import * as authSchemas from "../auth-schema";
 import { nextCookies } from "better-auth/next-js";
+import { admin } from "better-auth/plugins";
 import { Resend } from "resend";
 
 const resend = new Resend(process.env.RESEND_API_KEY);
@@ -81,18 +82,9 @@ export const auth = betterAuth({
       clientSecret: process.env.GITHUB_CLIENT_SECRET!,
     },
   },
-  //   user: {
-  //     additionalFields: {
-  //       role: {
-  //         type: "string",
-  //         required: false,
-  //         defaultValue: "user",
-  //         input: false,
-  //         validator: {
-  //           input: z.enum(["admin", "moderator", "organization", "user"]),
-  //         },
-  //       },
-  //     },
-  //   },
-  plugins: [nextCookies()],
+
+  plugins: [admin(), nextCookies()],
 });
+
+export type Session = typeof auth.$Infer.Session;
+export type User = typeof auth.$Infer.Session.user;

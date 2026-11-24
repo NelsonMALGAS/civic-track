@@ -13,3 +13,4 @@ export * from "./sla.schema";
 export * from "./communication.schema";
 export * from "./audit-log.schema";
 export * from "./relations";
+export * from "../../auth-schema";
