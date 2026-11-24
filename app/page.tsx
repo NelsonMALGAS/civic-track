@@ -1,14 +1,16 @@
-// import { redirect } from "next/navigation"
-// import { getServerSession } from "./server-actions"
+// import { auth } from "@/lib/auth";
+// import { headers } from "next/headers";
 
 const Home = async () => {
 
-  // const session = await getServerSession()
-  // const user = session?.user
+  // const { success } = await auth.api.userHasPermission({
+  //   headers: await headers(),
+  //   body: {
+  //     permissions: { project: ["delete"] },
+  //   },
+  // });
+  // console.log("HAS_PERMISSION", success)
 
-  // if (!user) redirect("/auth")
-
-  // console.log("USER", user)
   return (
     <div className="bg-background">Home</div>
   )

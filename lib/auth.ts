@@ -3,7 +3,8 @@ import { drizzleAdapter } from "better-auth/adapters/drizzle";
 import { db } from "@/db";
 import * as authSchemas from "../auth-schema";
 import { nextCookies } from "better-auth/next-js";
-import { admin } from "better-auth/plugins";
+import { admin as adminPlugin } from "better-auth/plugins";
+import { admin, moderator, municipality, user, ac } from "@/lib/permissions";
 import { Resend } from "resend";
 
 const resend = new Resend(process.env.RESEND_API_KEY);
@@ -83,7 +84,14 @@ export const auth = betterAuth({
     },
   },
 
-  plugins: [admin(), nextCookies()],
+  plugins: [
+    adminPlugin({
+      ac,
+      roles: { user, moderator, admin, municipality },
+      adminRoles: ["admin"],
+    }),
+    nextCookies(),
+  ],
 });
 
 export type Session = typeof auth.$Infer.Session;
